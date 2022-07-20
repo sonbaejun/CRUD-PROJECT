@@ -1,0 +1,54 @@
+.container {
+    background: beige;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: baseline;
+    align-content: space-between;
+}
+
+.item {
+    width: 40px;
+    height: 40px;
+}
+
+.item1 {
+    background: red;
+}
+
+.item2 {
+    background: blue;
+}
+
+.item3 {
+    background: green;
+}
+
+.item4 {
+    background: black;
+}
+
+.item5 {
+    background: purple;
+}
+
+.item6 {
+    background: yellow;
+}
+
+.item7 {
+    background: white;
+}
+
+.item8 {
+    background: gray;
+}
+
+.item9 {
+    background: brown;
+}
+
+.item10 {
+    background: orange;
+}
