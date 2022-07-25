@@ -1,4 +1,4 @@
-//하나 둘 셋 넷11
+//푸쉬가 되는지
 // let = 이미 사용하고 있을 때 에러 출력  const = 수정도 안되는 상수
 // 함수선언문은 초기화때 모든 함수를 실행 시켜놓음. 따라서 위에 있는 함수도 사용가능
 // 함수 표현식은 내가 아는 그 함수(선언된 뒤 사용가능)
@@ -399,22 +399,93 @@
 // jun.showName();
 // console.log(jun.age);
 
-class Car {
-    constructor(color) {
-        this.color = color;
-        this.wheels = 4;
-    }
-    drive() {
-        console.log("drive..");
-    }
-    stop() {
-        console.log("STOP!");
-    }
-}
+// class Car {
+//     constructor(color) {
+//         this.color = color;
+//         this.wheels = 4;
+//     }
+//     drive() {
+//         console.log("drive..");
+//     }
+//     stop() {
+//         console.log("STOP!");
+//     }
+// }
 
-class Bmw extends Car {
-    park() {
-        console.log("PARK");
-    }
-}
-const z4 = new Bmw("blue");
+// class Bmw extends Car {
+//     park() {
+//         console.log("PARK");
+//     }
+// }
+// const z4 = new Bmw("blue");
+
+// const pr = new Promise((resolve, reject)=> {
+//     setTimeout(() => {
+//         // resolve('OK');
+//         reject(new Error("err...."));
+//     }, 1000)
+// })
+
+// console.log('start');
+// pr.then(result => {
+//     console.log(result);
+// }).catch(err => {
+//     console.log(err);
+// }).finally(() => {
+//     console.log("끝");
+// });
+
+// const f1 = () => {
+//     return new Promise((res, rej) => {
+//        setTimeout(() => {
+//          res("1번 주문 완료");
+//     },1000);  
+//   });
+// };
+
+// const f2 = (message) => {
+//     console.log(message);
+//     return new Promise((res, rej) => {
+//         setTimeout(() => {
+//             res("xxx");
+//         },3000);
+//     });
+// };
+
+// const f3 = (message) => {
+//     console.log(message);
+//     return new Promise((res, rej) => {
+//         setTimeout(() => {
+//             res("3번 주문 완료");
+//         },2000);
+//     });
+// };
+
+// console.log('시작');
+// f1().then((res) => f2(res))
+//     .then((res) => f3(res))
+//     .then((res) => console.log(res))
+//     .catch(console.log)
+//     .finally(() => {
+//         console.log("끝");
+//     });
+
+//Promise.all
+// Promise.all([f1(), f2(), f3()])
+// .then((res) => {
+//     console.log(res);
+// });
+
+function fetchItems() {
+    return new Promise(function(resolve, reject) {
+        var items = [1,2,3];
+        resolve(items);
+    });
+};
+
+async function logItems() {
+    var resultItems = await fetchItems();
+    console.log(resultItems);
+};
+
+logItems();
