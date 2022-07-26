@@ -1,6 +1,4 @@
-/*
-create인지 update인지를 구별해주는 전역변수
-*/
+/*create인지 update인지를 구별해주는 전역변수*/
 var selectedRow = null;
 
 function onFormSubmit() {
@@ -9,16 +7,16 @@ function onFormSubmit() {
     */
     if(validate()) {
         var formData = readFormData();
-        //selectedRow로 create인지 update인지를 구분(update시 selectedRow를 인자로 받으므로)
+        /*selectedRow로 create인지 update인지를 구분(update시 selectedRow를 인자로 받으므로)*/
         if(selectedRow == null) {
-            //create는 새로운 row를 생성
+            /*create는 새로운 row를 생성*/
             insertNewRecord(formData);
         }
         else {
-            //update는 selcted된 row를 수정
+            /*update는 selcted된 row를 수정*/
             updateRecord(formData);
         }
-        //입력창 비우고 selectedRow 비우기
+        /*입력창 비우고 selectedRow 비우기*/
         resetForm();
     }
 }
@@ -46,8 +44,10 @@ function insertNewRecord(data) {
     cell2.innerHTML = data.title;
     cell3 = newRow.insertCell(2);
     cell3.innerHTML = data.content;
-    cell3 = newRow.insertCell(3);
-    cell3.innerHTML = `<a onClick="onEdit(this)">Edit</a>
+    cell4 = newRow.insertCell(3);
+    cell4.innerHTML = getToday();
+    cell4 = newRow.insertCell(4);
+    cell4.innerHTML = `<a onClick="onEdit(this)">Edit</a>
                        <a onClick="onDelete(this)">Delete</a>`;
 }
 
@@ -58,7 +58,7 @@ function resetForm() {
     document.getElementById("writer").value ="";
     document.getElementById("title").value ="";
     document.getElementById("content").value ="";
-    var selectedRow = null;
+    selectedRow = null;
 }
 
 function onEdit(td) {
@@ -107,3 +107,15 @@ function validate() {
     }
     return isValid;
 }
+
+function getToday() {
+    /*오늘 날짜 return*/
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+    return year + "-" + month + "-" + day;
+}
+
+// const moment = require("moment");
+// console.log("today", moment().format("YYYY-MM-DD"));
