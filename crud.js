@@ -126,10 +126,16 @@ var express = require("express");
 var mysql = require('mysql');
 var path = require('path');
 var bodyParser = require('body-parser');
+var ejs = require('ejs');
 const { copyFileSync } = require("fs");
+let cors = require('cors');
+let http = require('http');
 var app = express();
 var router = express.Router();
 
+// app.use(cors);
+app.set('view engine', 'ejs');
+app.set('views', './views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -148,17 +154,47 @@ con.connect(function (err) {
     const sql = 'SELECT * FROM users'
     con.query(sql, function(err, result, field) {
         if(err) throw err;
-        console.log(result);
     })
 })
+
+/* 데이터 삽입 */
+// const sql = "INSERT INTO users(name, title, content) VALUES('baejun', 'mad', 'guy')"
+// con.query(sql, function(err, result, fields) {
+//     if(err) throw err;
+//     console.log(result); 
+// })
 
 app.listen(3000, function() {
     console.log("start! express server on port 3000");
   });
 
-app.get('/', function(req,res) {
-    res.sendFile(path.join(__dirname + "/public/main.html"));
+
+app.get('/', function(req, res) {
+    const sql = "SELECT * FROM users";
+    con.query(sql, function(err, result, fields) {
+        if(err) throw err;
+        res.render('index', {users: result});
+    })
 })
+
+// app.get('/', function(req,res) {
+//     res.sendFile(path.join(__dirname + "/html/index.html"));
+// })
+app.post('/', function(req, res) {
+    const sql = "INSERT INTO users SET ?"
+
+    con.query(sql, req.body, function(err, result, field) {
+        if(err) throw err;
+        res.redirect('/');
+    })
+})
+
+
+// app.use(express.static('public'));
+
+
+
+
 // app.post('/', function(req, res) {
 //     const sql = "INSERT INTO users SET ?"
 
@@ -174,8 +210,6 @@ app.get('/', function(req,res) {
 // app.get('/main', function(req,res) {
 //     res.sendFile(__dirname + "/public/main.html")
 // })
-
-app.use(express.static('public'));
 
 // /* GET home page */
 // router.get('/', function(req, res, next) {
