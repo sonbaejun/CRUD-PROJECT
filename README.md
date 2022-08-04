@@ -1,1 +1,1 @@
-CRUD PROJECT
+CRUD PROJECT(curd.js file and views folder)

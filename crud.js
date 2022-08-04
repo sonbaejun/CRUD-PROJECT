@@ -1,7 +1,9 @@
 var express = require("express");
 var mysql = require('mysql');
 var path = require('path');
+/* post 메소드 처리할때 req.body의 내용이 undefined 되는걸 방지 */
 var bodyParser = require('body-parser');
+/* HTML과 똑같은 사용법인데 <% ---- %> 를 사용해 서버의 데이터 사용과 코드사용 가능*/
 var ejs = require('ejs');
 const { copyFileSync } = require("fs");
 let cors = require('cors');
@@ -9,7 +11,7 @@ let http = require('http');
 var app = express();
 var router = express.Router();
 
-// app.use(cors);
+/* app ejs 연결 및 경로설정 */
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(bodyParser.json());
